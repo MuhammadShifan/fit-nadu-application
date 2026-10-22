@@ -53,7 +53,7 @@ export default function AdminReports() {
     setDownloading("Gyms Detailed Report");
     try {
       // Changed to IP Address
-      const response = await axios.get('http://192.168.31.86:5000/api/gyms/admin/all');
+      const response = await axios.get('https://fit-nadu-backend.onrender.com/api/gyms/admin/all');
       if (response.data.success) {
         const tableData = response.data.gyms.map((gym, index) => [
           index + 1, 
@@ -77,7 +77,7 @@ export default function AdminReports() {
     setDownloading("Trainers Detailed Report");
     try {
       // Changed to IP Address
-      const response = await axios.get('http://192.168.31.86:5000/api/trainers/admin/all');
+      const response = await axios.get('https://fit-nadu-backend.onrender.com/api/trainers/admin/all');
       if (response.data.success) {
         const tableData = response.data.trainers.map((trainer, index) => [
           index + 1, 
@@ -102,7 +102,7 @@ export default function AdminReports() {
     setDownloading("Brands & Supplements Report");
     try {
       // Changed to IP Address
-      const response = await axios.get('http://192.168.31.86:5000/api/supplements/admin/all');
+      const response = await axios.get('https://fit-nadu-backend.onrender.com/api/supplements/admin/all');
       if (response.data.success) {
         const tableData = response.data.supplements.map((brand, index) => [
           index + 1, 
@@ -124,7 +124,7 @@ export default function AdminReports() {
     setDownloading("Overall Platform Summary Report");
     try {
       // Changed to IP Address
-      const response = await axios.get('http://192.168.31.86:5000/api/dashboard/stats');
+      const response = await axios.get('https://fit-nadu-backend.onrender.com/api/dashboard/stats');
       if (response.data.success) {
         const stats = response.data.stats;
         const tableData = [

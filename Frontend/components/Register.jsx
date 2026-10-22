@@ -33,7 +33,7 @@ export default function Register({ navigation }) {
     }
 
     try {
-      const response = await axios.post('http://192.168.31.86:5000/api/auth/register', {
+      const response = await axios.post('https://fit-nadu-backend.onrender.com/api/auth/register', {
         email,
         password,
       });

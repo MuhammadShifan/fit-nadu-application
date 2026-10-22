@@ -16,7 +16,7 @@ import axios from 'axios';
 import Header from './Header';
 import Footer from './Footer';
 
-const API_BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL || 'http://192.168.31.86:5000/api';
+const API_BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL || 'https://fit-nadu-backend.onrender.com/api';
 
 const DAYS_OF_WEEK = [
   'Monday',

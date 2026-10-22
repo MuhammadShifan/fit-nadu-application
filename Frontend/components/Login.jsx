@@ -32,7 +32,7 @@ export default function Login({ navigation }) {
     }
 
     try {
-      const response = await axios.post('http://192.168.31.86:5000/api/auth/login', {
+      const response = await axios.post('https://fit-nadu-backend.onrender.com/api/auth/login', {
         email,
         password,
       });

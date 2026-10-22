@@ -18,7 +18,7 @@ import Footer from './Footer';
 const { width } = Dimensions.get('window');
 const cardWidth = (width - 50) / 2;
 
-const API_URL = 'http://192.168.31.86:5000/api';
+const API_URL = 'https://fit-nadu-backend.onrender.com/api';
 
 export default function PersonalTrainerScreen({ navigation }) {
   const [searchQuery, setSearchQuery] = useState('');

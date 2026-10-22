@@ -60,7 +60,7 @@ async function registerForPushNotificationsAsync() {
 
 async function sendTokenToBackend(token) {
   try {
-    const API_BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL || 'http://192.168.31.86:5000/api';
+    const API_BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL || 'https://fit-nadu-backend.onrender.com/api';
     await axios.post(`${API_BASE_URL}/auth/save-token`, { pushToken: token });
   } catch (error) {
     console.error('Error saving push token:', error);

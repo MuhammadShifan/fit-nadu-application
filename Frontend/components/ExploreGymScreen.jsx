@@ -19,7 +19,7 @@ import Footer from './Footer';
 const { width, height } = Dimensions.get('window');
 const cardWidth = (width - 60) / 2;
 
-const API_URL = 'http://192.168.31.86:5000/api';
+const API_URL = 'https://fit-nadu-backend.onrender.com/api';
 
 const tnData = {
   "Ariyalur": ["Ariyalur", "Sendurai", "Udayarpalayam", "Andimadam"],
