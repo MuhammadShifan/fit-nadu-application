@@ -279,7 +279,8 @@ export default function AdminTrainers() {
           setShowAddModal(false);
           fetchTrainers();
         }
-      } else {
+      } 
+      else {
         const response = await axios.post(`${import.meta.env.VITE_API_URL}/trainers/add`, submitData, {
           headers: { 'Content-Type': 'multipart/form-data' }
         });
