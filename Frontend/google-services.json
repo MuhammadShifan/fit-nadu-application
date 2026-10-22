@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "724101983722",
+    "project_id": "fit-nadu",
+    "storage_bucket": "fit-nadu.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:724101983722:android:800e4506460df348a79693",
+        "android_client_info": {
+          "package_name": "com.muhammed_shifan.FitNadu"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXhp4VSOE2JDy5QDDR5BvNxEAHmocXJfE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
