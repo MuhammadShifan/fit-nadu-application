@@ -1,0 +1,265 @@
+/* Layout Basics */
+.admin-layout {
+  display: flex;
+  height: 100vh;
+  background-color: #09090B;
+  color: #FFFFFF;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow: hidden;
+}
+
+a { text-decoration: none; }
+
+/* MAIN CONTENT */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* DASHBOARD CONTAINER */
+.dashboard-container {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* PAGE HEADER FIXED FLEXBOX */
+.page-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 24px;
+}
+.page-header-text {
+  display: flex;
+  flex-direction: column;
+}
+.page-title { margin: 0 0 4px 0; font-size: 24px; font-weight: 700; }
+.page-subtitle { margin: 0; font-size: 13px; color: #A1A1AA; }
+.date-picker {
+  background-color: #18181B;
+  border: 1px solid #27272A;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #E4E4E7;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+/* STATS CARDS FIXED FLEXBOX */
+.stat-card {
+  background-color: #121214;
+  border: 1px solid #27272A;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: row; /* Forces horizontal alignment */
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+.stat-icon-wrapper {
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+  background-color: rgba(220, 38, 38, 0.15);
+  color: #DC2626;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+}
+.stat-details {
+  display: flex;
+  flex-direction: column;
+}
+.stat-title { margin: 0 0 4px 0; font-size: 13px; color: #A1A1AA; }
+.stat-count { margin: 0 0 4px 0; font-size: 24px; font-weight: 700; }
+.stat-growth { margin: 0; font-size: 11px; color: #71717A; }
+
+/* DASH CARDS & HEADERS */
+.dash-card {
+  background-color: #121214;
+  border: 1px solid #27272A;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+}
+.card-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.card-title-flex {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+.dropdown-pill {
+  background-color: #18181B;
+  border: 1px solid #27272A;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  color: #A1A1AA;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.view-all { color: #DC2626; font-size: 13px; font-weight: 500; }
+
+/* CHARTS MOCKUP */
+.chart-mockup { position: relative; height: 180px; width: 100%; }
+.line-chart-svg { width: 100%; height: 100%; }
+.chart-tooltip {
+  position: absolute; background-color: #18181B; border: 1px solid #DC2626;
+  padding: 8px; border-radius: 6px; font-size: 11px; box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+/* DONUT CHART MOCKUP */
+.donut-chart-container {
+  display: flex; flex-direction: column; align-items: center;
+}
+.donut-chart {
+  width: 120px; height: 120px; border-radius: 50%; margin-bottom: 20px;
+  background: conic-gradient(#DC2626 0% 86%, #FACC15 86% 93%, #4B5563 93% 100%);
+  display: flex; justify-content: center; align-items: center;
+}
+.donut-inner {
+  width: 90px; height: 90px; background-color: #121214; border-radius: 50%;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+}
+.donut-legends { width: 100%; }
+.legend-item { display: flex; align-items: center; font-size: 12px; color: #A1A1AA; margin-bottom: 8px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; margin-right: 10px; }
+
+/* RECENT ACTIVITIES FIXED FLEXBOX */
+.activities-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.activity-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+.activity-icon {
+  width: 36px;
+  height: 36px;
+  min-width: 36px; /* Prevents shrinking */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+}
+.activity-text {
+  flex: 1; /* Takes remaining space horizontally */
+  display: flex;
+  flex-direction: column;
+  line-height: 1.4;
+}
+.activity-text strong { font-size: 13px; color: #E4E4E7; }
+.activity-text span { font-size: 11px; color: #71717A; }
+.activity-time { font-size: 11px; color: #71717A; white-space: nowrap; }
+
+/* TABLES FIXED FLEXBOX */
+.custom-table { width: 100%; border-collapse: collapse; }
+.custom-table th { text-align: left; padding: 12px 10px; font-size: 12px; color: #71717A; border-bottom: 1px solid #27272A; }
+.custom-table td { padding: 12px 10px; font-size: 13px; color: #E4E4E7; border-bottom: 1px solid #27272A; }
+.custom-table tr:last-child td { border-bottom: none; }
+.table-item-flex {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* QUICK ACTIONS GRID */
+.quick-actions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.action-btn {
+  background-color: transparent; border: 1px solid #27272A; border-radius: 12px;
+  padding: 20px 10px; display: flex; flex-direction: column; align-items: center;
+  color: #A1A1AA; cursor: pointer; transition: all 0.3s;
+}
+.action-btn:hover { background-color: #18181B; border-color: #DC2626; color: #FFF; }
+.action-btn .action-icon {
+  width: 40px; height: 40px; border-radius: 50%; display: flex;
+  justify-content: center; align-items: center; font-size: 18px; margin-bottom: 10px;
+}
+.action-btn span { font-size: 12px; font-weight: 500; }
+
+/* Dashboard Cards General Styling */
+.dashboard-card {
+  background-color: #121214; /* Default dark theme background */
+  border: 1px solid #27272A;
+  border-radius: 12px;
+  padding: 20px;
+  height: 100%;
+}
+
+/* Fix for background overriding issue */
+.bg-dark {
+  background-color: transparent !important;
+}
+
+/* Select Dropdown styling fix inside Dashboard cards */
+.dashboard-card select {
+  background-color: #18181B !important;
+  color: #A1A1AA;
+  border: 1px solid #27272A;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* Quick Actions Box Fix */
+.quick-action-box {
+  background-color: #18181B; /* Making quick action boxes slightly lighter than main card */
+  border: 1px solid #27272A;
+  border-radius: 12px;
+  padding: 20px 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.quick-action-box:hover {
+  background-color: #27272A;
+  border-color: #3F3F46;
+}
+
+.quick-action-icon {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(220, 38, 38, 0.15); /* Soft red background */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin: 0 auto;
+}

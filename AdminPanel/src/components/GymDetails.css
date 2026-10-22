@@ -1,0 +1,374 @@
+.admin-layout {
+  display: flex;
+  height: 100vh;
+  background-color: #09090B;
+  color: #FFFFFF;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow: hidden;
+}
+
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden; 
+  width: calc(100% - 250px);
+}
+
+.dashboard-container {
+  padding: 24px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.breadcrumb-link {
+  cursor: pointer;
+  color: #71717A;
+  transition: color 0.2s;
+  font-size: 14px;
+}
+
+.breadcrumb-link:hover {
+  color: #FFF;
+}
+
+.active-path {
+  font-size: 14px;
+  color: #FFF;
+}
+
+.btn-danger-custom {
+  background-color: #DC2626;
+  color: #FFF;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-danger-custom:hover {
+  background-color: #B91C1C;
+}
+
+.gym-details-header {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+  background-color: #121214;
+  border-radius: 16px;
+  border: 1px solid #27272A;
+  padding: 24px;
+  width: 100%;
+}
+
+.gallery-section {
+  display: flex;
+  gap: 16px;
+  width: 55%;
+  height: 420px;
+  flex-shrink: 0;
+}
+
+.thumbnail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 80px;
+  flex-shrink: 0;
+}
+
+.nav-btn-up, .nav-btn-down {
+  background-color: transparent;
+  border: none;
+  height: 24px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.thumbnail {
+  width: 80px;
+  height: 65px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  opacity: 0.6;
+  transition: all 0.2s;
+  background-color: #121214;
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumbnail:hover, .thumbnail.active {
+  opacity: 1;
+}
+
+.thumbnail.active {
+  border-color: #DC2626;
+}
+
+.main-image-display {
+  flex-grow: 1;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #27272A;
+  background-color: #09090B; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.main-image-display img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+}
+
+.nav-btn-left, .nav-btn-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: all 0.2s;
+}
+
+.nav-btn-left {
+  left: 12px;
+}
+
+.nav-btn-right {
+  right: 12px;
+}
+
+.nav-btn-left:hover, .nav-btn-right:hover {
+  background-color: rgba(220, 38, 38, 0.8);
+  border-color: #DC2626;
+}
+
+.image-counter {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #FFF;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  backdrop-filter: blur(4px);
+}
+
+.info-section {
+  flex-grow: 1;
+  padding: 4px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.gym-main-title {
+  color: #FFF;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.status-badge-sm {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-badge-sm.active {
+  background-color: rgba(25, 135, 84, 0.1);
+  color: #28a745;
+  border: 1px solid rgba(25, 135, 84, 0.2);
+}
+
+.basic-info-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #A1A1AA;
+  font-size: 14px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid #27272A;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.stat-item i {
+  font-size: 20px;
+}
+
+.stat-value {
+  color: #FFF;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.stat-label {
+  color: #71717A;
+  font-size: 12px;
+}
+
+.dark-card {
+  background-color: #121214;
+  border: 1px solid #27272A;
+  border-radius: 12px;
+  padding: 24px;
+  width: 100%;
+}
+
+.card-title-sm {
+  color: #FFF;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.info-table {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #27272A;
+}
+
+.info-key {
+  color: #71717A;
+  font-size: 14px;
+}
+
+.info-val {
+  color: #E4E4E7;
+  font-size: 14px;
+}
+
+.address-box p {
+  line-height: 1.6;
+  font-size: 14px;
+  color: #E4E4E7; 
+}
+
+.map-placeholder {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #27272A;
+  background-color: #121214;
+}
+
+.map-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+}
+
+.map-pin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #FFF;
+  font-size: 12px;
+}
+
+.map-pin i {
+  font-size: 22px;
+  margin-bottom: 4px;
+}
+
+.amenities-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.amenity-badge {
+  background-color: transparent;
+  border: 1px solid #3F3F46;
+  color: #A1A1AA;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-text {
+  font-weight: 600;
+}
+
+.status-text.active { color: #28a745; }
+.status-text.pending { color: #ffc107; }
+.status-text.suspended { color: #DC2626; }
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 80px);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(220, 38, 38, 0.2);
+  border-radius: 50%;
+  border-top-color: #DC2626;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.leaflet-tile-pane {
+  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
