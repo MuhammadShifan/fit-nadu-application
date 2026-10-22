@@ -4,7 +4,6 @@ import {
   Text,
   View,
   ScrollView,
-  Image,
   TouchableOpacity,
   Dimensions,
   Modal,
@@ -15,6 +14,7 @@ import axios from 'axios';
 
 import Header from './Header';
 import Footer from './Footer';
+import CachedImage from './CachedImage'; 
 
 const { width, height } = Dimensions.get('window');
 const cardWidth = (width - 60) / 2;
@@ -179,14 +179,14 @@ export default function ExploreGymScreen({ navigation }) {
           <View style={styles.gridContainer}>
             {gymsList.map((gym, index) => (
               <View key={gym.id || index} style={[styles.gymCard, { width: cardWidth }]}>
-                <Image source={{ uri: gym.image }} style={styles.cardImage} resizeMode="cover" />
+                {/* Normal Image tag-ku pathila CachedImage use panniyachu */}
+                <CachedImage source={gym.image} style={styles.cardImage} resizeMode="cover" />
                 <Text style={styles.cardTitle} numberOfLines={1}>{gym.title}</Text>
                 <Text style={styles.cardSubtitle} numberOfLines={2}>{gym.subtitle}</Text>
                 
-                {/* PUTHU EXPLORE BUTTON ADD PANNIYACHU */}
                 <TouchableOpacity 
                   style={styles.exploreButton}
-                  onPress={() => navigation.navigate('GymDetails', { gymId: gym.id })} // Navigation venumna use pannikonga
+                  onPress={() => navigation.navigate('GymDetails', { gymId: gym.id })}
                 >
                   <Text style={styles.exploreButtonText}>Explore</Text>
                 </TouchableOpacity>
@@ -325,7 +325,6 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     borderWidth: 1,
     borderColor: 'rgba(220, 38, 38, 0.15)',
-    // PUTHU EXPLORE BUTTON ALIGNMENT-KAAGA ITHA ADD PANNIRUKKEN
     justifyContent: 'space-between',
     minHeight: 210, 
   },
@@ -347,14 +346,13 @@ const styles = StyleSheet.create({
     lineHeight: 15,
     marginBottom: 10,
   },
-  // EXPLORE BUTTON STYLES 👇
   exploreButton: {
     backgroundColor: '#DC2626',
     paddingVertical: 8,
     paddingHorizontal: 20,
     borderRadius: 20,
     alignSelf: 'center',
-    marginTop: 'auto', // Button-ah bottom center-la push pannum
+    marginTop: 'auto',
   },
   exploreButtonText: {
     color: '#FFFFFF',

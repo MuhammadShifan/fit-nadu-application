@@ -36,7 +36,8 @@
           "icon": "./assets/logo.png",
           "color": "#DC2626"
         }
-      ]
+      ],
+      "expo-image"
     ],
     "extra": {
       "eas": {

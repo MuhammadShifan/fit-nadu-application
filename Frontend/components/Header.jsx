@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { 
   StyleSheet, 
   View, 
-  Image, 
   TouchableOpacity, 
   Platform, 
   StatusBar, 
@@ -15,7 +14,8 @@ import {
 import { Feather, Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage'; // Puthusa add pannirukku
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import CachedImage from './CachedImage'; // CachedImage import panniyachu
 
 const API_BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL || 'https://fit-nadu-backend.onrender.com/api';
 
@@ -99,9 +99,6 @@ export default function Header() {
     }
   };
 
-  // -----------------------------------------------------
-  // LOGOUT FUNCTION - Ithu thaan main aana puthu code
-  // -----------------------------------------------------
   const handleLogout = () => {
     Alert.alert(
       "Logout",
@@ -113,8 +110,8 @@ export default function Header() {
           style: "destructive",
           onPress: async () => {
             try {
-              await AsyncStorage.removeItem('userToken'); // Token-ah memory-la irunthu thookiduthu
-              navigation.replace('Login'); // Login screen-kku anuppiduthu
+              await AsyncStorage.removeItem('userToken');
+              navigation.replace('Login');
             } catch (error) {
               console.error("Logout Error: ", error);
             }
@@ -168,7 +165,8 @@ export default function Header() {
     <View style={styles.safeHeaderWrapper}>
       <View style={styles.header}>
         <View style={styles.logoContainer}>
-          <Image
+          {/* Normal Image tag-ku pathila CachedImage use panniyachu */}
+          <CachedImage
             source={require('../assets/logo.png')}
             style={styles.headerLogo}
             resizeMode="cover"
@@ -192,7 +190,6 @@ export default function Header() {
             )}
           </TouchableOpacity>
           
-          {/* USER ICON-AH LOGOUT BUTTON-AH MAATHIYAACHU */}
           <TouchableOpacity 
             style={styles.iconButton} 
             activeOpacity={0.7}

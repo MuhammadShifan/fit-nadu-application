@@ -4,7 +4,6 @@ import {
   Text,
   View,
   ScrollView,
-  Image,
   TouchableOpacity,
   Dimensions,
   ActivityIndicator,
@@ -14,6 +13,7 @@ import { Ionicons, Feather, MaterialCommunityIcons, FontAwesome5 } from '@expo/v
 import axios from 'axios';
 import Header from './Header';
 import Footer from './Footer';
+import CachedImage from './CachedImage';
 
 const { width } = Dimensions.get('window');
 const API_BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL || 'https://fit-nadu-backend.onrender.com/api';
@@ -105,9 +105,10 @@ export default function GymDetailsScreen({ route, navigation }) {
         <View style={styles.imageSliderContainer}>
           <ScrollView horizontal pagingEnabled showsHorizontalScrollIndicator={false}>
             {gymImages.map((img, index) => (
-              <Image
+              /* Normal Image tag-ku pathila CachedImage use panniyachu */
+              <CachedImage
                 key={index}
-                source={{ uri: img }}
+                source={img}
                 style={styles.gymImage}
                 resizeMode="cover"
               />

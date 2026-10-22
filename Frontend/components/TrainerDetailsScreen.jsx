@@ -4,7 +4,6 @@ import {
   Text,
   View,
   ScrollView,
-  Image,
   TouchableOpacity,
   Dimensions,
   ActivityIndicator,
@@ -14,6 +13,7 @@ import axios from 'axios';
 
 import Header from './Header';
 import Footer from './Footer';
+import CachedImage from './CachedImage';
 
 const { width } = Dimensions.get('window');
 const API_BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL || 'https://fit-nadu-backend.onrender.com/api';
@@ -99,9 +99,10 @@ export default function TrainerDetailsScreen({ route, navigation }) {
         <View style={styles.imageSliderContainer}>
           <ScrollView horizontal pagingEnabled showsHorizontalScrollIndicator={false}>
             {trainerImages.map((img, index) => (
-              <Image
+              /* Normal Image tag-ku pathila CachedImage use panniyachu */
+              <CachedImage
                 key={index}
-                source={{ uri: img }}
+                source={img}
                 style={styles.trainerImage}
                 resizeMode="cover"
               />
@@ -148,13 +149,14 @@ export default function TrainerDetailsScreen({ route, navigation }) {
             <Text style={styles.contactTitle}>Contact</Text>
             <View style={styles.socialRow}>
               <TouchableOpacity onPress={openInstagram} activeOpacity={0.8}>
-                <Image
+                {/* Social icons-kum CachedImage use panniyachu */}
+                <CachedImage
                   source={{ uri: 'https://cdn-icons-png.flaticon.com/512/1384/1384063.png' }}
                   style={styles.socialIcon}
                 />
               </TouchableOpacity>
               <TouchableOpacity onPress={openEmail} activeOpacity={0.8}>
-                <Image
+                <CachedImage
                   source={{ uri: 'https://cdn-icons-png.flaticon.com/512/5968/5968534.png' }}
                   style={styles.socialIcon}
                 />

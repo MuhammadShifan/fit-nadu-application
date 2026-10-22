@@ -4,7 +4,6 @@ import {
   Text,
   View,
   ScrollView,
-  Image,
   TouchableOpacity,
   Dimensions,
   TextInput,
@@ -14,6 +13,7 @@ import axios from 'axios';
 
 import Header from './Header';
 import Footer from './Footer';
+import CachedImage from './CachedImage'; 
 
 const { width } = Dimensions.get('window');
 const cardWidth = (width - 50) / 2;
@@ -89,7 +89,8 @@ export default function PersonalTrainerScreen({ navigation }) {
               <View key={trainer.id} style={[styles.trainerCard, { width: cardWidth }]}>
                 
                 <View style={styles.avatarContainer}>
-                  <Image source={{ uri: trainer.image }} style={styles.avatarImage} resizeMode="cover" />
+                  {/* Normal Image tag-ku pathila CachedImage use panniyachu */}
+                  <CachedImage source={trainer.image} style={styles.avatarImage} resizeMode="cover" />
                 </View>
                 
                 <Text style={styles.trainerName} numberOfLines={1}>{trainer.name}</Text>

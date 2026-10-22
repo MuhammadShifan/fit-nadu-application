@@ -4,7 +4,6 @@ import {
   Text,
   View,
   ScrollView,
-  Image,
   TouchableOpacity,
   Dimensions,
   ActivityIndicator,
@@ -16,6 +15,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Header from './Header';
 import Footer from './Footer';
+import CachedImage from './CachedImage'; // CachedImage import panniyachu
 
 const { width } = Dimensions.get('window');
 const cardWidth = width * 0.52;
@@ -173,7 +173,8 @@ export default function HomeScreen({ navigation }) {
           }
         }}
       >
-        <Image source={{ uri: imageUrl }} style={styles.cardImage} resizeMode="cover" />
+        {/* Normal Image tag-ku pathila CachedImage use panniyachu */}
+        <CachedImage source={imageUrl} style={styles.cardImage} resizeMode="cover" />
         <Text style={styles.cardTitle} numberOfLines={1}>{displayTitle}</Text>
         <Text style={styles.cardSubtitle} numberOfLines={2}>{displaySubtitle}</Text>
       </TouchableOpacity>
@@ -295,7 +296,8 @@ export default function HomeScreen({ navigation }) {
 
         <View style={styles.bannerContainer}>
           <View style={styles.bannerLeft}>
-            <Image
+            {/* Banner image-kum CachedImage use panniyachu */}
+            <CachedImage
               source={require('../assets/pt.png')}
               style={styles.bannerImage}
               resizeMode="contain"

@@ -4,7 +4,6 @@ import {
   Text,
   View,
   ScrollView,
-  Image,
   TouchableOpacity,
   Dimensions,
   TextInput,
@@ -15,6 +14,7 @@ import axios from 'axios';
 
 import Header from './Header';
 import Footer from './Footer';
+import CachedImage from './CachedImage'; 
 
 const { width } = Dimensions.get('window');
 const cardWidth = (width - 50) / 2;
@@ -116,7 +116,7 @@ export default function BuySupplementScreen({ navigation }) {
               <View key={brand.id} style={[styles.brandCard, { width: cardWidth }]}>
                 
                 <View style={styles.brandImageContainer}>
-                  <Image source={{ uri: brand.image }} style={styles.brandImage} resizeMode="cover" />
+                  <CachedImage source={brand.image} style={styles.brandImage} resizeMode="cover" />
                 </View>
                 
                 <View style={styles.ratingRow}>
@@ -135,7 +135,6 @@ export default function BuySupplementScreen({ navigation }) {
                   {brand.description}
                 </Text>
                 
-                {/* ALIGNMENT CHANGE PANNA BUTTON 👇 */}
                 <TouchableOpacity 
                   style={styles.openButton} 
                   activeOpacity={0.8}
@@ -227,7 +226,6 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'space-between',
   },
-  // CARD HEIGHT FIX PANNIRUKKEN
   brandCard: {
     backgroundColor: '#18181B',
     borderRadius: 16,
@@ -235,8 +233,8 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     borderWidth: 1,
     borderColor: '#27272A',
-    minHeight: 250, // Fixed min height so cards look even
-    justifyContent: 'space-between', // Pushes content evenly
+    minHeight: 250,
+    justifyContent: 'space-between',
   },
   brandImageContainer: {
     width: '100%',
@@ -276,16 +274,14 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     marginBottom: 6,
   },
-  // DESCRIPTION HEIGHT FIX PANNIRUKKEN
   descriptionText: {
     fontSize: 10,
     color: '#A1A1AA',
     marginBottom: 14,
     lineHeight: 14,
     fontStyle: 'italic',
-    minHeight: 56, // Entha text irunthalum ithu fixed height edukkum
+    minHeight: 56,
   },
-  // BUTTON ALIGNMENT UPDATE PANNIRUKKEN (Gym screen maari Pill shape)
   openButton: {
     backgroundColor: '#DC2626',
     flexDirection: 'row',
@@ -295,7 +291,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',
-    marginTop: 'auto', // Always bottom mela push aagum
+    marginTop: 'auto',
   },
   openButtonText: {
     color: '#FFFFFF',
