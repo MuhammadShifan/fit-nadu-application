@@ -1,8 +1,6 @@
 const Fitness = require('../models/Fitness');
 const Food = require('../models/Food');
 
-const TEST_USER_ID = "650c12345678901234567890";
-
 const tamilNaduFoods = [
     { name: "Soya Chunks (Dry / Meal Maker)", aliases: ["soya chunks", "soy chunks", "meal maker", "soya", "tvp"], kcal: 345, protein: 52, carbs: 33, fibre: 13 },
     { name: "Soya Chunks (Boiled / Cooked)", aliases: ["boiled soya", "cooked soya chunks", "boiled meal maker"], kcal: 120, protein: 18, carbs: 11, fibre: 4.5 },
@@ -200,7 +198,7 @@ const ensureFoodsSeeded = async () => {
 exports.getFitnessData = async (req, res) => {
     try {
         await ensureFoodsSeeded();
-        const userId = req.user ? req.user.id : TEST_USER_ID; 
+        const userId = req.user.id || req.user._id; 
         
         let fitnessData = await Fitness.findOne({ userId });
 
@@ -228,7 +226,7 @@ exports.getFitnessData = async (req, res) => {
 
 exports.updateProfile = async (req, res) => {
     try {
-        const userId = req.user ? req.user.id : TEST_USER_ID;
+        const userId = req.user.id || req.user._id;
         const { weight, height, waterGoal, workoutPlan, target } = req.body;
 
         const updateFields = {
@@ -307,7 +305,7 @@ exports.searchFood = async (req, res) => {
 
 exports.updateWaterIntake = async (req, res) => {
     try {
-        const userId = req.user ? req.user.id : TEST_USER_ID;
+        const userId = req.user.id || req.user._id;
         const { waterIntake } = req.body;
 
         const fitnessData = await Fitness.findOneAndUpdate(
@@ -324,7 +322,7 @@ exports.updateWaterIntake = async (req, res) => {
 
 exports.addFoodItem = async (req, res) => {
     try {
-        const userId = req.user ? req.user.id : TEST_USER_ID;
+        const userId = req.user.id || req.user._id;
         const { name, weight, kcal, protein, carbs, fibre } = req.body;
 
         const fitnessData = await Fitness.findOne({ userId });
@@ -348,13 +346,12 @@ exports.addFoodItem = async (req, res) => {
 
 exports.deleteFoodItem = async (req, res) => {
     try {
-        const userId = req.user ? req.user.id : TEST_USER_ID;
+        const userId = req.user.id || req.user._id;
         const foodId = req.params.foodId;
 
         const fitnessData = await Fitness.findOne({ userId });
         if (!fitnessData) return res.status(404).json({ success: false, message: 'Fitness data not found' });
 
-        // Item kandupudikirathu
         const foodIndex = fitnessData.nutrition.foodDiary.findIndex(food => food._id.toString() === foodId);
         
         if (foodIndex === -1) {
@@ -363,13 +360,11 @@ exports.deleteFoodItem = async (req, res) => {
 
         const foodToDelete = fitnessData.nutrition.foodDiary[foodIndex];
 
-        // Macros-ah consumed-la irunthu minus pandrathu
         fitnessData.nutrition.consumed.kcal = Math.max(0, fitnessData.nutrition.consumed.kcal - foodToDelete.kcal);
         fitnessData.nutrition.consumed.protein = Math.max(0, fitnessData.nutrition.consumed.protein - foodToDelete.protein);
         fitnessData.nutrition.consumed.carbs = Math.max(0, fitnessData.nutrition.consumed.carbs - foodToDelete.carbs);
         fitnessData.nutrition.consumed.fibre = Math.max(0, fitnessData.nutrition.consumed.fibre - foodToDelete.fibre);
 
-        // Diary-la irunthu antha item-ah remove pandrathu
         fitnessData.nutrition.foodDiary.splice(foodIndex, 1);
 
         await fitnessData.save();

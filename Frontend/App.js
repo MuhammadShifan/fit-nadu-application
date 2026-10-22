@@ -2,7 +2,7 @@ import 'react-native-gesture-handler';
 import React, { useEffect } from 'react';
 import { Platform, Alert } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
+import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 import * as Notifications from 'expo-notifications';
 import * as Device from 'expo-device';
 import axios from 'axios';
@@ -16,11 +16,13 @@ import BuySupplementScreen from './components/BuySupplementScreen';
 import MyFitnessScreen from './components/MyFitnessScreen';
 import GymDetailsScreen from './components/GymDetailsScreen';
 import TrainerDetailsScreen from './components/TrainerDetailsScreen';
+import PrivacyPolicyScreen from './components/PrivacyPolicyScreen.jsx'
+import TermsOfServiceScreen from './components/TermsOfServiceScreen.jsx'
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
-    shouldShowBanner: true, // Puthu property
-    shouldShowList: true,   // Puthu property
+    shouldShowBanner: true, 
+    shouldShowList: true,
     shouldPlaySound: true,
     shouldSetBadge: false,
   }),
@@ -83,7 +85,9 @@ export default function App() {
       <Stack.Navigator 
         screenOptions={{ 
           headerShown: false,
-          ...TransitionPresets.SlideFromRightIOS
+          animationEnabled: false,
+          gestureEnabled: false,
+          cardStyleInterpolator: CardStyleInterpolators.forNoAnimation
         }}
       >
         <Stack.Screen name="Login" component={Login} />
@@ -95,6 +99,8 @@ export default function App() {
         <Stack.Screen name="Fitness" component={MyFitnessScreen} />
         <Stack.Screen name="GymDetails" component={GymDetailsScreen} />
         <Stack.Screen name="TrainerDetails" component={TrainerDetailsScreen} />
+        <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicyScreen} />
+        <Stack.Screen name="TermsOfService" component={TermsOfServiceScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

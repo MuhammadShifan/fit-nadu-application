@@ -16,6 +16,8 @@ import {
 import { Ionicons, Feather, MaterialCommunityIcons } from '@expo/vector-icons';
 import axios from 'axios';
 
+const API_BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL || 'https://fit-nadu-backend.onrender.com/api';
+
 export default function Login({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -32,7 +34,7 @@ export default function Login({ navigation }) {
     }
 
     try {
-      const response = await axios.post('https://fit-nadu-backend.onrender.com/api/auth/login', {
+      const response = await axios.post(`${API_BASE_URL}/auth/login`, {
         email,
         password,
       });
@@ -64,7 +66,7 @@ export default function Login({ navigation }) {
             />
           </View>
 
-          {/* User Sign In Badge Header - Puthusa Add Panniyachu */}
+          {/* User Sign In Badge Header */}
           <View style={styles.loginBadgeContainer}>
             <View style={styles.badgeLine} />
             <Text style={styles.loginBadgeText}>Sign In</Text>

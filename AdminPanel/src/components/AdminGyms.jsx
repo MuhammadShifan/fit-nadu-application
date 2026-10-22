@@ -179,7 +179,6 @@ export default function AdminGyms() {
     }
   };
 
-  // PUTHU STAR BUTTON LOGIC (Show in Home Screen)
   const handleToggleFeatured = async (id) => {
     try {
       const response = await axios.put(`${import.meta.env.VITE_API_URL}/gyms/toggle-featured/${id}`);

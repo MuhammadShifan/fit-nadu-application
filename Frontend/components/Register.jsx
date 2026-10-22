@@ -15,6 +15,8 @@ import {
 import { Ionicons, Feather, MaterialCommunityIcons } from '@expo/vector-icons';
 import axios from 'axios';
 
+const API_BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL || 'https://fit-nadu-backend.onrender.com/api';
+
 export default function Register({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -33,7 +35,7 @@ export default function Register({ navigation }) {
     }
 
     try {
-      const response = await axios.post('https://fit-nadu-backend.onrender.com/api/auth/register', {
+      const response = await axios.post(`${API_BASE_URL}/auth/register`, {
         email,
         password,
       });
@@ -167,7 +169,7 @@ export default function Register({ navigation }) {
               <TouchableOpacity>
                 <Text style={styles.footerLinkText}>Privacy policy</Text>
               </TouchableOpacity>
-              <Text style={styles.footerDot}> • </Text>
+              <Text style={styles.footerDot}>•</Text>
               <TouchableOpacity>
                 <Text style={styles.footerLinkText}>Terms of service</Text>
               </TouchableOpacity>

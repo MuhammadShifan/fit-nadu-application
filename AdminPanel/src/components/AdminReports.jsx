@@ -52,7 +52,6 @@ export default function AdminReports() {
   const downloadGymsReport = async () => {
     setDownloading("Gyms Detailed Report");
     try {
-      // Changed to IP Address
       const response = await axios.get('https://fit-nadu-backend.onrender.com/api/gyms/admin/all');
       if (response.data.success) {
         const tableData = response.data.gyms.map((gym, index) => [
@@ -76,7 +75,6 @@ export default function AdminReports() {
   const downloadTrainersReport = async () => {
     setDownloading("Trainers Detailed Report");
     try {
-      // Changed to IP Address
       const response = await axios.get('https://fit-nadu-backend.onrender.com/api/trainers/admin/all');
       if (response.data.success) {
         const tableData = response.data.trainers.map((trainer, index) => [
@@ -101,7 +99,6 @@ export default function AdminReports() {
   const downloadBrandsReport = async () => {
     setDownloading("Brands & Supplements Report");
     try {
-      // Changed to IP Address
       const response = await axios.get('https://fit-nadu-backend.onrender.com/api/supplements/admin/all');
       if (response.data.success) {
         const tableData = response.data.supplements.map((brand, index) => [
@@ -123,7 +120,6 @@ export default function AdminReports() {
   const downloadOverallReport = async () => {
     setDownloading("Overall Platform Summary Report");
     try {
-      // Changed to IP Address
       const response = await axios.get('https://fit-nadu-backend.onrender.com/api/dashboard/stats');
       if (response.data.success) {
         const stats = response.data.stats;

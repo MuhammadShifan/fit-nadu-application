@@ -16,7 +16,7 @@ export default function Footer({ activeTab }) {
         <TouchableOpacity 
           style={styles.navItem} 
           activeOpacity={0.7} 
-          onPress={() => navigation.navigate('Home')}
+          onPress={() => navigation.replace('Home')}
         >
           <View style={[styles.iconCircle, activeTab === 'Home' && styles.activeIconCircle]}>
             <Feather 
@@ -32,7 +32,7 @@ export default function Footer({ activeTab }) {
         <TouchableOpacity 
           style={styles.navItem} 
           activeOpacity={0.7} 
-          onPress={() => navigation.navigate('ExploreGym')}
+          onPress={() => navigation.replace('ExploreGym')}
         >
           <View style={[styles.iconCircle, activeTab === 'ExploreGym' && styles.activeIconCircle]}>
             <Feather 
@@ -48,7 +48,7 @@ export default function Footer({ activeTab }) {
         <TouchableOpacity 
           style={styles.navItem} 
           activeOpacity={0.7} 
-          onPress={() => {navigation.navigate('Trainer')}}
+          onPress={() => {navigation.replace('Trainer')}}
         >
           <View style={[styles.iconCircle, activeTab === 'Trainer' && styles.activeIconCircle]}>
             <Feather 
@@ -64,7 +64,7 @@ export default function Footer({ activeTab }) {
         <TouchableOpacity 
           style={styles.navItem} 
           activeOpacity={0.7} 
-          onPress={() => {navigation.navigate('Supplements')}}
+          onPress={() => {navigation.replace('Supplements')}}
         >
           <View style={[styles.iconCircle, activeTab === 'Supplements' && styles.activeIconCircle]}>
             <Feather 
@@ -80,7 +80,7 @@ export default function Footer({ activeTab }) {
         <TouchableOpacity 
           style={styles.navItem} 
           activeOpacity={0.7} 
-          onPress={() => {navigation.navigate('Fitness')}}
+          onPress={() => {navigation.replace('Fitness')}}
         >
           <View style={[styles.iconCircle, activeTab === 'Fitness' && styles.activeIconCircle]}>
             <Feather 
