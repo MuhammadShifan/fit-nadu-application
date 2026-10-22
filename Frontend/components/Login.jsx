@@ -15,6 +15,7 @@ import {
 
 import { Ionicons, Feather, MaterialCommunityIcons } from '@expo/vector-icons';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const API_BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL || 'https://fit-nadu-backend.onrender.com/api';
 
@@ -39,6 +40,8 @@ export default function Login({ navigation }) {
         password,
       });
 
+      await AsyncStorage.setItem('userToken', response.data.token);
+      
       Alert.alert('Success', response.data.message);
       navigation.replace('Home');
 

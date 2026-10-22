@@ -1,11 +1,12 @@
 import 'react-native-gesture-handler';
-import React, { useEffect } from 'react';
-import { Platform, Alert } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Platform, ActivityIndicator, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 import * as Notifications from 'expo-notifications';
 import * as Device from 'expo-device';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Login from './components/Login';
 import Register from './components/Register';
@@ -72,17 +73,43 @@ async function sendTokenToBackend(token) {
 const Stack = createStackNavigator();
 
 export default function App() {
+  const [initialRoute, setInitialRoute] = useState(null);
+
   useEffect(() => {
     registerForPushNotificationsAsync().then(token => {
       if (token) {
         sendTokenToBackend(token);
       }
     });
+
+    const checkLoginStatus = async () => {
+      try {
+        const token = await AsyncStorage.getItem('userToken');
+        if (token) {
+          setInitialRoute('Home');
+        } else {
+          setInitialRoute('Login');
+        }
+      } catch (error) {
+        setInitialRoute('Login');
+      }
+    };
+    
+    checkLoginStatus();
   }, []);
+
+  if (initialRoute === null) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#09090B' }}>
+        <ActivityIndicator size="large" color="#DC2626" />
+      </View>
+    );
+  }
 
   return (
     <NavigationContainer>
       <Stack.Navigator 
+        initialRouteName={initialRoute}
         screenOptions={{ 
           headerShown: false,
           animationEnabled: false,

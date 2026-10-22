@@ -9,11 +9,13 @@ import {
   Text, 
   Modal, 
   FlatList, 
-  ActivityIndicator 
+  ActivityIndicator,
+  Alert 
 } from 'react-native';
 import { Feather, Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage'; // Puthusa add pannirukku
 
 const API_BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL || 'https://fit-nadu-backend.onrender.com/api';
 
@@ -83,23 +85,43 @@ export default function Header() {
     }
   };
 
-  // Puthu Delete Function
   const deleteNotification = async (id) => {
     try {
-      // Backend api call maduthe
       await axios.delete(`${API_BASE_URL}/notifications/${id}`);
-      
-      // Delete aada notification annu list ninda thegeyuvudu
       const notificationToDelete = notifications.find(n => n._id === id);
       setNotifications(notifications.filter(n => n._id !== id));
       
-      // Oduvudakke munche delete madidare unread count kadiime maduvudu
       if (notificationToDelete && !notificationToDelete.isRead) {
         setUnreadCount(prev => Math.max(0, prev - 1));
       }
     } catch (error) {
       console.error('Error deleting notification:', error);
     }
+  };
+
+  // -----------------------------------------------------
+  // LOGOUT FUNCTION - Ithu thaan main aana puthu code
+  // -----------------------------------------------------
+  const handleLogout = () => {
+    Alert.alert(
+      "Logout",
+      "Are you sure you want to sign out?",
+      [
+        { text: "Cancel", style: "cancel" },
+        { 
+          text: "Logout", 
+          style: "destructive",
+          onPress: async () => {
+            try {
+              await AsyncStorage.removeItem('userToken'); // Token-ah memory-la irunthu thookiduthu
+              navigation.replace('Login'); // Login screen-kku anuppiduthu
+            } catch (error) {
+              console.error("Logout Error: ", error);
+            }
+          }
+        }
+      ]
+    );
   };
 
   const getIconData = (type) => {
@@ -131,7 +153,6 @@ export default function Header() {
           <Text style={styles.notiMessage}>{item.message}</Text>
         </View>
 
-        {/* Delete Button UI */}
         <TouchableOpacity 
           style={styles.deleteButton}
           onPress={() => deleteNotification(item._id)}
@@ -171,11 +192,13 @@ export default function Header() {
             )}
           </TouchableOpacity>
           
+          {/* USER ICON-AH LOGOUT BUTTON-AH MAATHIYAACHU */}
           <TouchableOpacity 
             style={styles.iconButton} 
             activeOpacity={0.7}
+            onPress={handleLogout}
           >
-            <Feather name="user" size={20} color="#FFFFFF" />
+            <Feather name="log-out" size={20} color="#DC2626" />
           </TouchableOpacity>
         </View>
       </View>
@@ -344,7 +367,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     marginBottom: 8,
     backgroundColor: '#18181B',
-    alignItems: 'flex-start', // Added for better alignment with delete button
+    alignItems: 'flex-start',
   },
   unreadCard: {
     backgroundColor: '#27272A', 
@@ -374,7 +397,7 @@ const styles = StyleSheet.create({
   textContainer: {
     flex: 1,
     justifyContent: 'center',
-    paddingRight: 8, // Added space for delete button
+    paddingRight: 8, 
   },
   notiTitle: {
     fontSize: 13,

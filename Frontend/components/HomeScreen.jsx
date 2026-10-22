@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Header from './Header';
 import Footer from './Footer';
@@ -39,16 +40,20 @@ export default function HomeScreen({ navigation }) {
   useEffect(() => {
     const fetchHomeData = async () => {
       try {
-        const [gymsRes, suppsRes, trainersRes, fitnessRes] = await Promise.all([
-          axios.get(`${API_BASE_URL}/gyms/featured`),
-          axios.get(`${API_BASE_URL}/supplements/featured`),
-          axios.get(`${API_BASE_URL}/trainers/featured`),
-          axios.get(`${API_BASE_URL}/fitness`)
-        ]);
+        const token = await AsyncStorage.getItem('userToken');
+        const config = token ? { headers: { Authorization: `Bearer ${token}` } } : null;
 
-        setFeaturedGyms(gymsRes.data.gyms || []);
-        setSupplements(suppsRes.data.supplements || []);
-        setFeaturedTrainers(trainersRes.data.trainers || []);
+        // Individual catch blocks so one failure doesn't stop others
+        const gymsReq = axios.get(`${API_BASE_URL}/gyms/featured`).catch(() => ({ data: { gyms: [] } }));
+        const suppsReq = axios.get(`${API_BASE_URL}/supplements/featured`).catch(() => ({ data: { supplements: [] } }));
+        const trainersReq = axios.get(`${API_BASE_URL}/trainers/featured`).catch(() => ({ data: { trainers: [] } }));
+        const fitnessReq = config ? axios.get(`${API_BASE_URL}/fitness`, config).catch(() => ({ data: null })) : Promise.resolve({ data: null });
+
+        const [gymsRes, suppsRes, trainersRes, fitnessRes] = await Promise.all([gymsReq, suppsReq, trainersReq, fitnessReq]);
+
+        setFeaturedGyms(gymsRes.data?.gyms || []);
+        setSupplements(suppsRes.data?.supplements || []);
+        setFeaturedTrainers(trainersRes.data?.trainers || []);
 
         if (fitnessRes.data && fitnessRes.data.success && fitnessRes.data.fitness) {
           const fitData = fitnessRes.data.fitness;
@@ -110,8 +115,13 @@ export default function HomeScreen({ navigation }) {
       }
     };
 
+    const unsubscribe = navigation.addListener('focus', () => {
+      fetchHomeData();
+    });
+
     fetchHomeData();
-  }, []);
+    return unsubscribe;
+  }, [navigation, todayName]);
 
   const SectionHeader = ({ title, onPress }) => (
     <View style={styles.sectionHeader}>

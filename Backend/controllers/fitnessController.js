@@ -198,7 +198,7 @@ const ensureFoodsSeeded = async () => {
 exports.getFitnessData = async (req, res) => {
     try {
         await ensureFoodsSeeded();
-        const userId = req.user.id || req.user._id; 
+        const userId = req.user.userId || req.user.id || req.user._id; 
         
         let fitnessData = await Fitness.findOne({ userId });
 
@@ -226,7 +226,7 @@ exports.getFitnessData = async (req, res) => {
 
 exports.updateProfile = async (req, res) => {
     try {
-        const userId = req.user.id || req.user._id;
+        const userId = req.user.userId || req.user.id || req.user._id;
         const { weight, height, waterGoal, workoutPlan, target } = req.body;
 
         const updateFields = {
@@ -305,7 +305,7 @@ exports.searchFood = async (req, res) => {
 
 exports.updateWaterIntake = async (req, res) => {
     try {
-        const userId = req.user.id || req.user._id;
+        const userId = req.user.userId || req.user.id || req.user._id;
         const { waterIntake } = req.body;
 
         const fitnessData = await Fitness.findOneAndUpdate(
@@ -322,7 +322,7 @@ exports.updateWaterIntake = async (req, res) => {
 
 exports.addFoodItem = async (req, res) => {
     try {
-        const userId = req.user.id || req.user._id;
+        const userId = req.user.userId || req.user.id || req.user._id;
         const { name, weight, kcal, protein, carbs, fibre } = req.body;
 
         const fitnessData = await Fitness.findOne({ userId });
@@ -346,7 +346,7 @@ exports.addFoodItem = async (req, res) => {
 
 exports.deleteFoodItem = async (req, res) => {
     try {
-        const userId = req.user.id || req.user._id;
+        const userId = req.user.userId || req.user.id || req.user._id;
         const foodId = req.params.foodId;
 
         const fitnessData = await Fitness.findOne({ userId });

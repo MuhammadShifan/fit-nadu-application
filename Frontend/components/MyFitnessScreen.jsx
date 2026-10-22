@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Header from './Header';
 import Footer from './Footer';
@@ -78,7 +79,12 @@ export default function MyFitnessScreen({ navigation }) {
   const fetchMyFitnessData = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.get(`${API_BASE_URL}/fitness`);
+      const token = await AsyncStorage.getItem('userToken');
+      
+      const response = await axios.get(`${API_BASE_URL}/fitness`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      
       if (response.data && response.data.success) {
         const data = response.data.fitness;
 
@@ -182,6 +188,7 @@ export default function MyFitnessScreen({ navigation }) {
     }));
 
     try {
+      const token = await AsyncStorage.getItem('userToken');
       await axios.put(`${API_BASE_URL}/fitness/profile`, {
         weight: parseFloat(cleanWeight) || 0,
         height: parseFloat(cleanHeight) || 0,
@@ -193,6 +200,8 @@ export default function MyFitnessScreen({ navigation }) {
           carbs: parseFloat(updatedTarget.carbs) || 0,
           fibre: parseFloat(updatedTarget.fibre) || 0,
         },
+      }, {
+        headers: { Authorization: `Bearer ${token}` }
       });
     } catch (error) {
       console.error("Error updating fitness data:", error);
@@ -209,8 +218,11 @@ export default function MyFitnessScreen({ navigation }) {
     setFilledGlasses(newAmount);
 
     try {
+      const token = await AsyncStorage.getItem('userToken');
       await axios.put(`${API_BASE_URL}/fitness/water`, {
         waterIntake: newAmount
+      }, {
+        headers: { Authorization: `Bearer ${token}` }
       });
     } catch (error) {
       console.error("Error updating water:", error);
@@ -231,9 +243,12 @@ export default function MyFitnessScreen({ navigation }) {
     if (text.trim().length > 0) {
       setIsSearching(true);
       try {
+        const token = await AsyncStorage.getItem('userToken');
         const response = await axios.get(`${API_BASE_URL}/fitness/search-food`, {
-          params: { q: text.trim() }
+          params: { q: text.trim() },
+          headers: { Authorization: `Bearer ${token}` }
         });
+        
         if (response.data && response.data.found) {
           const list = response.data.foods || (response.data.food ? [response.data.food] : []);
           setSearchResults(list);
@@ -269,8 +284,11 @@ export default function MyFitnessScreen({ navigation }) {
     const weightMultiplier = parseFloat(foodWeight) / 100;
 
     try {
+      const token = await AsyncStorage.getItem('userToken');
+      
       const localResponse = await axios.get(`${API_BASE_URL}/fitness/search-food`, {
-        params: { q: foodName.trim() }
+        params: { q: foodName.trim() },
+        headers: { Authorization: `Bearer ${token}` }
       });
 
       if (localResponse.data && localResponse.data.found && localResponse.data.food) {
@@ -287,6 +305,8 @@ export default function MyFitnessScreen({ navigation }) {
           protein: protein,
           carbs: carbs,
           fibre: fiber
+        }, {
+          headers: { Authorization: `Bearer ${token}` }
         });
 
         if (response.data && response.data.success && response.data.fitness) {
@@ -308,7 +328,6 @@ export default function MyFitnessScreen({ navigation }) {
     }
   };
 
-  // PUTHIYA DELETE FUNCTION
   const handleDeleteFood = (foodId) => {
     Alert.alert(
       "Delete Food",
@@ -320,7 +339,11 @@ export default function MyFitnessScreen({ navigation }) {
           style: "destructive",
           onPress: async () => {
             try {
-              const response = await axios.delete(`${API_BASE_URL}/fitness/food/${foodId}`);
+              const token = await AsyncStorage.getItem('userToken');
+              const response = await axios.delete(`${API_BASE_URL}/fitness/food/${foodId}`, {
+                headers: { Authorization: `Bearer ${token}` }
+              });
+              
               if (response.data && response.data.success) {
                 setLoggedFoods([...response.data.fitness.nutrition.foodDiary].reverse());
               }
@@ -1047,5 +1070,3 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-
-
